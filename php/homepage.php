@@ -1,5 +1,9 @@
 <?php
-$mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
+    $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
+    $sql='SELECT * FROM artworks WHERE artworkID BETWEEN 58 and 60';
+    $sql1='SELECT * FROM artworks WHERE artworkID BETWEEN 92 and 103';
+    $result=$mysqli->query($sql);
+    $result1=$mysqli->query($sql1);
 ?>
 
 <!DOCTYPE html>
@@ -7,8 +11,6 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
   	<head>
     	<title>Homepage</title>
     	<meta charset="utf-8">
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="description" content="Sublime project">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
     	<link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -16,7 +18,7 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
     	<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     	<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
     	<link rel="stylesheet" type="text/css" href="../css/homepage.css">
-    	<link rel="stylesheet" type="text/css" href="../styles/responsive.css">
+    	<link rel="stylesheet" type="text/css" href="../css/responsive.css">
   	</head>
 	<body>
     	<div class="super_container">
@@ -31,8 +33,8 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
 		  							<nav class="main_nav">
 		    							<ul>
 		      								<li class="active"><a href="homepage.php">Home</a></li>
-		      								<li><a href="datail.php">Detail</a></li>
-		      								<li><a href="#">Login</a></li>
+		      								<li><a href="detail.php">Product</a></li>
+		      								<li><a href="login.php">Login</a></li>
 		      								<li><a href="#">Register</a></li>
 		    							</ul>
 		  							</nav>
@@ -92,86 +94,24 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
 	  				</div>
 				</div>
 
-				<!-- Social 
-				<div class="header_social">
-	  				<ul>
-	    				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-	    				<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-	   					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-	    				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-	  				</ul>
-				</div>
-				-->
-
       		</header>
-
-      		<!-- Menu -->
-
-      		<div class="menu menu_mm trans_300">
-				<div class="menu_container menu_mm">
-	  				<div class="page_menu_content"> 
-	    				<div class="page_menu_search menu_mm">
-	      					<form action="#">
-								<input type="search" required="required" class="page_menu_search_input menu_mm" placeholder="Search for products...">
-	      					</form>
-	    				</div>
-	    				<ul class="page_menu_nav menu_mm">
-	      					<li class="page_menu_item has-children menu_mm">
-								<a href="index.html">Home<i class="fa fa-angle-down"></i></a>
-								<ul class="page_menu_selection menu_mm">
-									<li class="page_menu_item menu_mm"><a href="categories.html">Categories<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item menu_mm"><a href="product.html">Product<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i class="fa fa-angle-down"></i></a></li>
-									<li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
-								</ul>
-	      					</li>
-	      					<li class="page_menu_item has-children menu_mm">
-								<a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
-								<ul class="page_menu_selection menu_mm">
-		  							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-		  							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-		  							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-		  							<li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-								</ul>
-	      					</li>
-	      					<li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
-	      					<li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
-	      					<li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
-	    				</ul>
-	  				</div>
-				</div>
-				<div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-				<div class="menu_social">
-	  				<ul>
-	    				<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-	    				<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-	    				<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-	    				<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-	  				</ul>
-				</div>
-      		</div>
-      
-            <!-- Home -->
-
             <div class="home">
                 <div class="home_slider_container"> 
                     <div class="owl-carousel owl-theme home_slider"> 
                     <!-- Slider Item -->
                     <?php
-                        $fig=[36,44,68];
-                        foreach($fig as $p)
+                        foreach($result as $p)
                         {
                             echo '<div class="owl-item home_slider_item">';
-                            echo '<div class="home_slider_background" style="background-image:url(../resources/img/'.$p.'.jpg)"></div>';
+                            echo '<div class="home_slider_background" style="background-image:url(../resources/img/'.$p["imageFileName"].')"></div>';
                             echo '<div class="home_slider_content_container">';
                             echo '<div class="container">';
                             echo '<div class="row">';
                             echo '<div class="col">';
                             echo '<div class="home_slider_content"  data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">';
-                            echo '<div class="home_slider_title">A new Online Shop experience.</div>';
-                            echo '<div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</div>';
-                            echo '<div class="button button_light home_button"><a href="#">Shop Now</a></div>';
+                            echo '<div class="home_slider_title">'.$p["title"].'</div>';
+                            echo '<div class="home_slider_subtitle">'.substr($p["description"],0,400).'</div>';
+                            echo '<div class="button button_light home_button"><a href="detail.php" id="'.$p["artworkID"].'">Shop Now</a></div>';
                             echo '</div></div></div></div></div></div>';
                         }
                     ?>
@@ -215,7 +155,7 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
 	                    </div>
 	                    <div class="avds_small_content">
 		                    <div class="avds_title">Art Works</div>
-		                    <div class="avds_link"><a href="datail.php">See More</a></div>
+		                    <div class="avds_link"><a href="detail.php" id="47">See More</a></div>
 	                    </div>
 	                </div>
 	            </div>
@@ -225,7 +165,7 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
 	                    <div class="avds_large_content">
 		                    <div class="avds_title">Professional Art works</div>
 		                    <div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viver ra velit venenatis fermentum luctus.</div>
-		                    <div class="avds_link avds_link_large"><a href="detail.php">See More</a></div>
+		                    <div class="avds_link avds_link_large"><a href="detail.php" id="58">See More</a></div>
 	                    </div>
 	                </div>
 	            </div>
@@ -240,177 +180,25 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
 	                <div class="col">
 	                    <div class="product_grid">
 
-                            <div class="product">
-		                        <div class="product_image"><img src="../resources/icon/product_1.jpg" alt=""></div>
-		                        <div class="product_extra product_new"><a href="categories.html">New</a></div>
-		                        <div class="product_content">
-		                            <div class="product_title"><a href="product.html">Smart Phone</a></div>
-		                            <div class="product_price">$670</div>
-		                        </div>
-		                    </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_2.jpg" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Sale</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_3.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_4.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_5.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_6.jpg" alt=""></div>
-                            <div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_7.jpg" alt=""></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
-                            <!-- Product -->
-                            <div class="product">
-                            <div class="product_image"><img src="../resources/icon/product_8.jpg" alt=""></div>
-                            <div class="product_extra product_sale"><a href="categories.html">Hot</a></div>
-                            <div class="product_content">
-                                <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                                <div class="product_price">$670</div>
-                            </div>
-                            </div>
-
+                            <?php
+                                foreach($result1 as $p)
+                                {
+                                    echo '<div class="product">';
+                                    echo '<div class="product_image"><img src="../resources/img/'.$p["imageFileName"].'" alt=""></div>';
+                                    echo '<div class="product_extra product_new"><a href="#">New</a></div>';
+                                    echo '<div class="product_content">';
+    		                        echo '<div class="product_title"><a href="detail.php" id="'.$p["artworkID"].'">'.$p["title"].'</a></div>';
+                                    echo '<div class="product_price">$'.$p["price"].'</div>';
+                                    echo '</div></div>';
+                                }
+                            ?>
+                            
                         </div>
 	                </div>
 	            </div>
 	        </div>
         </div>
 
-      <!-- Ad 
-
-      <div class="avds_xl">
-	<div class="container">
-	  <div class="row">
-	    <div class="col">
-	      <div class="avds_xl_container clearfix">
-		<div class="avds_xl_background" style="background-image:url(images/avds_xl.jpg)"></div>
-		<div class="avds_xl_content">
-		  <div class="avds_title">Amazing Devices</div>
-		  <div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus.</div>
-		  <div class="avds_link avds_xl_link"><a href="categories.html">See More</a></div>
-		</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <!-- Icon Boxes 
-
-      <div class="icon_boxes">
-	<div class="container">
-	  <div class="row icon_box_row">
-	    
-	    <!-- Icon Box 
-	    <div class="col-lg-4 icon_box_col">
-	      <div class="icon_box">
-		<div class="icon_box_image"><img src="images/icon_1.svg" alt=""></div>
-		<div class="icon_box_title">Free Shipping Worldwide</div>
-		<div class="icon_box_text">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie.</p>
-		</div>
-	      </div>
-	    </div>
-
-	    <!-- Icon Box 
-	    <div class="col-lg-4 icon_box_col">
-	      <div class="icon_box">
-		<div class="icon_box_image"><img src="images/icon_2.svg" alt=""></div>
-		<div class="icon_box_title">Free Returns</div>
-		<div class="icon_box_text">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie.</p>
-		</div>
-	      </div>
-	    </div>
-
-	    <!-- Icon Box 
-	    <div class="col-lg-4 icon_box_col">
-	      <div class="icon_box">
-		<div class="icon_box_image"><img src="images/icon_3.svg" alt=""></div>
-		<div class="icon_box_title">24h Fast Support</div>
-		<div class="icon_box_text">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie.</p>
-		</div>
-	      </div>
-	    </div>
-
-	  </div>
-	</div>
-      </div>
-
-      <!-- Newsletter 
-
-      <div class="newsletter">
-	<div class="container">
-	  <div class="row">
-	    <div class="col">
-	      <div class="newsletter_border"></div>
-	    </div>
-	  </div>
-	  <div class="row">
-	    <div class="col-lg-8 offset-lg-2">
-	      <div class="newsletter_content text-center">
-		<div class="newsletter_title">Subscribe to our newsletter</div>
-		<div class="newsletter_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros</p></div>
-		<div class="newsletter_form_container">
-		  <form action="#" id="newsletter_form" class="newsletter_form">
-		    <input type="email" class="newsletter_input" required="required">
-		    <button class="newsletter_button trans_200"><span>Subscribe</span></button>
-		  </form>
-		</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-      </div>
-
-      <!-- Footer -->
-      
     <div class="footer_overlay"></div>
         <footer class="footer">
 	        <div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
@@ -440,6 +228,8 @@ $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
     </div>
 
     <script src="../javascript/jquery-3.2.1.min.js"></script>
+    <script src="../javascript/js.cookie.js"></script>
+    <script src="../javascript/goods.js"></script>
     <script src="../css/bootstrap/js/popper.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
