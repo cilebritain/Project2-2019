@@ -119,7 +119,10 @@
 						$p=$_COOKIE["nowproduct"];
 						$sql='SELECT * FROM artworks WHERE artworkID='.$p;
 						$result=$mysqli->query($sql);
-						$q=$result->fetch_object();
+						if(!$result){
+							$q=$mysqli->query('SELECT * FROM artworks WHERE artworkID=6')->fetch_object();
+						}
+						else $q=$result->fetch_object();
 
 						echo '<div class="col-lg-6">';
 						echo '<div class="details_image">';

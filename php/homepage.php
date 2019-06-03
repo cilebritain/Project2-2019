@@ -3,7 +3,7 @@
     $sql='SELECT * FROM artworks WHERE artworkID BETWEEN 58 and 60';
     $sql1='SELECT * FROM artworks WHERE artworkID BETWEEN 92 and 103';
     $result=$mysqli->query($sql);
-    $result1=$mysqli->query($sql1);
+	$result1=$mysqli->query($sql1);
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +32,18 @@
 		  							<div class="logo"><a href="#">Art Store</a></div>
 		  							<nav class="main_nav">
 		    							<ul>
-		      								<li class="active"><a href="homepage.php">Home</a></li>
-		      								<li><a href="detail.php">Product</a></li>
-		      								<li><a href="login.php">Login</a></li>
-		      								<li><a href="#">Register</a></li>
+											<li class="active"><a href="homepage.php">Home</a></li>
+											<li><a href="detail.php">Product</a></li>
+											<?php
+												if(empty($_COOKIE['user'])||$_COOKIE['user']==''){
+													echo '<li><a href="login.php">Login</a></li>';
+													echo '<li><a href="register.php">Register</a></li>';
+												}
+												else{
+													echo '<li><a href="cart.php" style="color:red;">'.$_COOKIE['user'].'</a></li>';
+													echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+												}
+											?>
 		    							</ul>
 		  							</nav>
 		  							<div class="header_extra ml-auto">
@@ -229,7 +237,8 @@
 
     <script src="../javascript/jquery-3.2.1.min.js"></script>
     <script src="../javascript/js.cookie.js"></script>
-    <script src="../javascript/goods.js"></script>
+	<script src="../javascript/goods.js"></script>
+	<script src="../javascript/login.js"></script>
     <script src="../css/bootstrap/js/popper.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>

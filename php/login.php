@@ -28,21 +28,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>    
                 </form>
-                <script type="text/javascript">
-                    function handlelogin(){
-                        alert('fuck');
-                        var user=document.getElementById('exampleInputUsername1').value;
-                        var pwd=document.getElementById('exampleInputPassword1').value;
-                        if(user.length==0||RegExp.test(user)){
-                            alert('用户名格式不对');
-                            return false;
-                        }
-                        if(pwd.length==0||RegExp.test(pwd)){
-                            alert('密码格式不对')；
-                            return false;
-                        }
-                    }
-                </script>
             </div>
             <div class="col"></div>
         </div>
@@ -77,6 +62,7 @@
     <script src="../javascript/jquery-3.2.1.min.js"></script>
     <script src="../javascript/js.cookie.js"></script>
     <script src="../javascript/goods.js"></script>
+    <script src="../javascript/login.js"></script>
     <script src="../css/bootstrap/js/popper.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
