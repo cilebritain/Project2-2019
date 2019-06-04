@@ -30,7 +30,7 @@
 										<li><a href="homepage.php">Home</a></li>
 										<li class="active"><a href="datail.php">Product</a></li>
 										<li><a href="login.php">Login</a></li>
-										<li><a href="#">Register</a></li>
+										<li><a href="register.php">Register</a></li>
 									</ul>
 								</nav>
 								<div class="header_extra ml-auto">
@@ -222,7 +222,6 @@
 	<script src="../javascript/jquery-3.2.1.min.js"></script>    
 	<script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
-	<script src="../css/bootstrap/js/popper.js"></script>
 	<script src="../css/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../plugins/greensock/TweenMax.min.js"></script>
 	<script src="../plugins/greensock/TimelineMax.min.js"></script>

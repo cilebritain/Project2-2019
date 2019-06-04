@@ -239,7 +239,6 @@
     <script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
 	<script src="../javascript/login.js"></script>
-    <script src="../css/bootstrap/js/popper.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
     <script src="../plugins/greensock/TimelineMax.min.js"></script>
