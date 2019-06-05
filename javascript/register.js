@@ -25,3 +25,12 @@ function handleregister(){
     }
     return true;
 }
+
+$("#register_a").click(function(){
+    Cookies.set('pre_web',location.href);
+});
+
+$("#login_a").click(function(){
+    Cookies.set('pre_web',location.href);
+});
+

@@ -36,8 +36,8 @@
 											<li><a href="detail.php">Product</a></li>
 											<?php
 												if(empty($_COOKIE['user'])||$_COOKIE['user']==''){
-													echo '<li><a href="login.php">Login</a></li>';
-													echo '<li><a href="register.php">Register</a></li>';
+													echo '<li><a href="login.php" id="login_a">Login</a></li>';
+													echo '<li><a href="register.php" id="register_a">Register</a></li>';
 												}
 												else{
 													echo '<li><a href="cart.php" style="color:red;">'.$_COOKIE['user'].'</a></li>';
@@ -239,6 +239,7 @@
     <script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
 	<script src="../javascript/login.js"></script>
+	<script src="../javascript/register.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
     <script src="../plugins/greensock/TimelineMax.min.js"></script>

@@ -27,10 +27,17 @@
 								<div class="logo"><a href="homepage.php">Art Store</a></div>
 								<nav class="main_nav">
 									<ul>
-										<li><a href="homepage.php">Home</a></li>
-										<li class="active"><a href="datail.php">Product</a></li>
-										<li><a href="login.php">Login</a></li>
-										<li><a href="register.php">Register</a></li>
+										<li class="active"><a href="homepage.php">Home</a></li>
+										<li><a href="detail.php">Product</a></li>
+										<?php
+											if(empty($_COOKIE['user'])||$_COOKIE['user']==''){
+												echo '<li><a href="login.php" id="login_a">Login</a></li>';
+												echo '<li><a href="register.php" id="register_a">Register</a></li>';
+											}else{
+												echo '<li><a href="cart.php" style="color:red;">'.$_COOKIE['user'].'</a></li>';
+												echo '<li><a href="#" onclick="logout()">Logout</a></li>';
+											}
+										?>
 									</ul>
 								</nav>
 								<div class="header_extra ml-auto">
@@ -144,7 +151,7 @@
 						echo '<div class="quantity_buttons">';
 						echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
 						echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
-						echo '</div></div><div class="button cart_button"><a href="#">Add to cart</a></div></div>';
+						echo '</div></div><div class="button cart_button"><a href="cart.php" onclick="return add_cart()">Add to cart</a></div></div>';
 						echo '</div></div></div>';
 						echo '<div class="row description_row">';
 						echo '<div class="col">';
@@ -222,6 +229,9 @@
 	<script src="../javascript/jquery-3.2.1.min.js"></script>    
 	<script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
+	<script src="../javascript/login.js"></script>
+	<script src="../javascript/register.js"></script>
+	<script src="../javascript/cart.js"></script>
 	<script src="../css/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../plugins/greensock/TweenMax.min.js"></script>
 	<script src="../plugins/greensock/TimelineMax.min.js"></script>

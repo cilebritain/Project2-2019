@@ -17,6 +17,6 @@
         echo '<script type="text/javascript" src="../javascript/js.cookie.js"></script>';
         echo "<script>Cookies.set('user','".$user."');";
         echo 'alert("you have successfully login!");';
-        echo 'window.location.href="homepage.php";</script>';        
+        echo 'window.location.href="'.$_COOKIE['pre_web'].'";</script>';        
     }
 ?>

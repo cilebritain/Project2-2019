@@ -10,7 +10,7 @@
     $result=$mysqli->query($sql);
 
     if($result->fetch_object()){
-        echo '<script>alert("this username have already existed");</script>';
+        echo '<script>alert("this username have already existed");window.location.href="register.php";</script>';
     }else{
         $sql1='SELECT count(*) FROM users';
         $result1=$mysqli->query($sql1);
@@ -19,7 +19,8 @@
         $sql2='INSERT INTO users (userID,name,email,password,tel,address,balance)
             VALUES('.($row+1).',"'.$user.'","'.$email.'","'.$pwd.'","'.$tel.'","'.$add.'",'.'0)';
         $mysqli->query($sql2);
-        echo '<script>alert("you have successfully registered!");window.location.href="homepage.php";</script>';
+        echo '<script src="../javascript/js.cookie.js"></script>';
+        echo '<script>alert("you have successfully registered!");Cookies.set("user","'.$user.'");window.location.href="'.$_COOKIE['pre_web'].'";</script>';
     }
 
 ?>
