@@ -127,6 +127,7 @@
 						$sql='SELECT * FROM artworks WHERE artworkID='.$p;
 						$result=$mysqli->query($sql);
 						if(!$result){
+							$_COOKIE['nowproduct']=6;
 							$q=$mysqli->query('SELECT * FROM artworks WHERE artworkID=6')->fetch_object();
 						}
 						else $q=$result->fetch_object();
