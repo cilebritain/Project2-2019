@@ -152,7 +152,7 @@
 						echo '<div class="quantity_buttons">';
 						echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
 						echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
-						echo '</div></div><div class="button cart_button"><a href="cart.php" onclick="return add_cart()">Add to cart</a></div></div>';
+						echo '</div></div><div class="button cart_button"><a href="cart.php" onclick="add_cart()">Add to cart</a></div></div>';
 						echo '</div></div></div>';
 						echo '<div class="row description_row">';
 						echo '<div class="col">';

@@ -12,8 +12,6 @@
 <body>
 
 <div class="super_container">
-
-<div class="super_container">
     <!-- Header -->
     <header class="header">
         <div class="header_container">
@@ -136,51 +134,58 @@
 			</div>
 			<div class="row cart_items_row">
 				<div class="col">
-
-					<!-- Cart Item -->
-					<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-						<!-- Name -->
-						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
-							<div class="cart_item_image">
-								<div><img src="../resources/icon/cart_1.jpg" alt=""></div>
-							</div>
-							<div class="cart_item_name_container">
-								<div class="cart_item_name"><a href="#">Smart Phone Deluxe Edition</a></div>
-								<div class="cart_item_edit"><a href="#">Edit Product</a></div>
-							</div>
-						</div>
-						<!-- Price -->
-						<div class="cart_item_price">$790.90</div>
-						<!-- Quantity -->
-						<div class="cart_item_quantity">
-							<div class="product_quantity_container">
-								<div class="product_quantity clearfix">
-									<span>Qty</span>
-									<input id="quantity_input" type="text" pattern="[0-9]*" value="1">
-									<div class="quantity_buttons">
-										<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
-										<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Total -->
-						<div class="cart_item_total">$790.90</div>
-					</div>
-
+					<?php
+						$mysqli=new mysqli('localhost','root','r00t','db_project2');
+						$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+						$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
+						$sql='SELECT artworkID FROM carts WHERE userID='.$uid;
+						$result=mysqli_fetch_all($mysqli->query($sql));
+						$sum=0;
+						foreach($result as $o){
+							$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
+							$sum=$p->price;
+							echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
+								echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
+									echo '<div class="cart_item_image">';
+										echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+									echo '</div>';
+									echo '<div class="cart_item_name_container">';
+										echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
+										echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
+									echo '</div>';
+								echo '</div>';
+								echo '<div class="cart_item_price">$'.$p->price.'</div>';
+								echo '<div class="cart_item_quantity">';
+									echo '<div class="product_quantity_container">';
+										echo '<div class="product_quantity clearfix">';
+											echo '<span>Qty</span>';
+											echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
+											echo '<div class="quantity_buttons">';
+												echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
+												echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+								echo '<div class="cart_item_total">'.$sum.'</div>';
+							echo '</div>';
+						}
+					?>
 				</div>
 			</div>
-			<div class="row row_cart_buttons">
+
+			<div class="row row_cart_buttons" style="margin-top:50px;">
 				<div class="col">
 					<div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-						<div class="button continue_shopping_button"><a href="#">Continue shopping</a></div>
+						<div class="button continue_shopping_button"><a href="detail.php">Continue shopping</a></div>
 						<div class="cart_buttons_right ml-lg-auto">
-							<div class="button clear_cart_button"><a href="#">Clear cart</a></div>
+							<div class="button clear_cart_button"><a href="#" onclick="clear_cart()">Clear Cart</a></div>
 							<div class="button update_cart_button"><a href="#">Update cart</a></div>
 						</div>
 					</div>
 				</div>
 			</div>
+
 			<div class="row row_extra">
 				<div class="col-lg-4">
 					
@@ -274,12 +279,12 @@
 	        </div>
         </footer>
     </div>
-
     <script src="../javascript/jquery-3.2.1.min.js"></script>
     <script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
 	<script src="../javascript/login.js"></script>
 	<script src="../javascript/register.js"></script>
+	<script src="../javascript/cart.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
     <script src="../plugins/greensock/TimelineMax.min.js"></script>

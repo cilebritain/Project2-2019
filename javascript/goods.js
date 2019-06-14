@@ -10,3 +10,6 @@ $('.home_button a').click(function(){
     Cookies.set('nowproduct',$(this).attr('id'));
 });
 
+$('.cart_item_name a').click(function(){
+    Cookies.set('nowproduct',$(this).attr('id'));
+});

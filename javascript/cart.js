@@ -4,14 +4,30 @@ function add_cart(){
         return false;
     }
     var artworkID=Cookies.get('nowproduct');
-    var xmlhttp=new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function(){
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            // document.getElementById("").innerHTML=xmlhttp.responseText;
-        }
+    var xmlhttp;
+    if (window.XMLHttpRequest){
+        xmlhttp=new XMLHttpRequest();
+    } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.open("GET","../php/test.php",true);
-    //xmlhttp.open("GET","../php/addtocart.php?artworkID="+artworkID,true);
+    xmlhttp.open("GET","../php/addtocart.php?artworkID="+artworkID,true);
     xmlhttp.send();
     return true;
+}
+
+function clear_cart(){
+    var message=confirm('Are you sure clear all the goods in the cart?');
+    if(message==true){
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        } else {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","../php/clear_cart.php",true);
+        xmlhttp.send();
+        window.location.reload();            
+    }else{
+        
+    }
 }
