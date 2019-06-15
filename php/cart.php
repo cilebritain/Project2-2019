@@ -48,7 +48,23 @@
                                                 c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
                                             </g>
                                         </svg>
-                                        <div>Cart <span>(0)</span></div>
+                                        <div>
+											Cart 
+											<span>
+												<?php
+													if(empty($_COOKIE['user'])||$_COOKIE["user"]==''){
+														$result_cart=0;
+													}else{
+														$mysqli_cart=new mysqli('localhost','root','r00t','db_project2');
+														$get_u_cart='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+														$uid_cart=mysqli_fetch_object($mysqli_cart->query($get_u_cart))->userID;
+														$sql_cart='SELECT count(*) FROM carts WHERE userID='.$uid_cart;
+														$result_cart=mysqli_fetch_row($mysqli_cart->query($sql_cart))[0];
+													}
+													echo '('.$result_cart.')';
+												?> 
+											</span>
+										</div>
                                     </a>
                                 </div>
                                 <div class="search">
@@ -143,7 +159,7 @@
 						$sum=0;
 						foreach($result as $o){
 							$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
-							$sum=$p->price;
+							$sum+=$p->price;
 							echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
 								echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
 									echo '<div class="cart_item_image">';
@@ -167,7 +183,7 @@
 										echo '</div>';
 									echo '</div>';
 								echo '</div>';
-								echo '<div class="cart_item_total">'.$sum.'</div>';
+								echo '<div class="cart_item_total">'.$p->price.'</div>';
 							echo '</div>';
 						}
 					?>
@@ -197,12 +213,12 @@
 							<label class="delivery_option clearfix">Next day delivery
 								<input type="radio" name="radio">
 								<span class="checkmark"></span>
-								<span class="delivery_price">$4.99</span>
+								<span class="delivery_price">Free</span>
 							</label>
 							<label class="delivery_option clearfix">Standard delivery
 								<input type="radio" name="radio">
 								<span class="checkmark"></span>
-								<span class="delivery_price">$1.99</span>
+								<span class="delivery_price">Free</span>
 							</label>
 							<label class="delivery_option clearfix">Personal pickup
 								<input type="radio" checked="checked" name="radio">
@@ -233,7 +249,7 @@
 							<ul>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Subtotal</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div class="cart_total_value ml-auto">$<?php echo $sum; ?></div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Shipping</div>
@@ -241,7 +257,7 @@
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Total</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div class="cart_total_value ml-auto">$<?php echo $sum; ?></div>
 								</li>
 							</ul>
 						</div>

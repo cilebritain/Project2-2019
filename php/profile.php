@@ -1,11 +1,8 @@
-<?php
-    $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
-?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Product</title>
+	<title>Profile</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
@@ -13,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="../css/product.css">
-    <link rel="stylesheet" type="text/css" href="../css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="../css/contact.css">
+    <link rel="stylesheet" type="text/css" href="../css/contact_responsive.css">
 </head>
 <body>
 	<div class="super_container">
@@ -55,7 +52,7 @@
 											<div>
 												Cart 
 												<span>
-													<?php
+                                                    <?php
                                                         if(empty($_COOKIE['user'])||$_COOKIE["user"]==''){
                                                             $result_cart=0;
 														}else{
@@ -112,18 +109,21 @@
 			</div>
 		</header>
 	
-		<!-- Home -->
+	<!-- Home -->
 
-		<div class="home">
-			<div class="home_container">
-				<div class="home_background" style="background-image:url(../resources/icon/categories.jpg)"></div>
-				<div class="home_content_container">
-					<div class="container">
-						<div class="row">
-							<div class="col">
-								<div class="home_content">
-									<div class="home_title">Buy Art Works Now<span>.</span></div>
-									<div class="home_text"><p>Find Beauty in Your Life.</p></div>
+	<div class="home">
+		<div class="home_container">
+			<div class="home_background" style="background-image:url(../resources/icon/contact.jpg)"></div>
+			<div class="home_content_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="home_content">
+								<div class="breadcrumbs">
+									<ul>
+										<li><a href="index.html">Home</a></li>
+										<li>Profile</li>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -131,93 +131,80 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Product Details -->
+	<!-- Contact -->
+	
+	<div class="contact">
+		<div class="container">
+			<div class="row">
 
-		<div class="product_details">
-			<div class="container">
-				<div class="row details_row">
-
-					<?php
-						$p=$_COOKIE["nowproduct"];
-						$sql='SELECT * FROM artworks WHERE artworkID='.$p;
-						$result=$mysqli->query($sql);
-						if(!$result){
-							$_COOKIE['nowproduct']=6;
-							$q=$mysqli->query('SELECT * FROM artworks WHERE artworkID=6')->fetch_object();
-						}
-						else $q=$result->fetch_object();
-
-						echo '<div class="col-lg-6">';
-						echo '<div class="details_image">';
-						echo '<div class="details_image_large"><img src="../resources/img/'.$q->imageFileName.'" alt=""><div class="product_extra product_new"><a href="#">New</a></div></div></div></div>';
-						echo '<div class="col-lg-6">';
-						echo '<div class="details_content">';
-						echo '<div class="details_name">'.$q->title.'</div>';
-						echo '<div class="details_discount">$'.(($q->price)+100).'</div>';
-						echo '<div class="details_price">$'.$q->price.'</div>';
-						echo '<div class="in_stock_container">';
-						echo '<div class="availability">Availability:</div>';
-						echo '<span>In Stock</span></div>';
-						echo '<div class="details_text">';
-						echo '<p>'.$q->description.'</p></div>';
-						echo '<div class="product_quantity_container">';
-						echo '<div class="product_quantity clearfix">';
-						echo '<span>Qty</span>';
-						echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
-						echo '<div class="quantity_buttons">';
-						echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
-						echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
-						echo '</div></div><div class="button cart_button"><a href="cart.php" onclick="add_cart()">Add to cart</a></div></div>';
-						echo '</div></div></div>';
-						echo '<div class="row description_row">';
-						echo '<div class="col">';
-						echo '<div class="description_title_container">';
-						echo '<div class="description_title">Description</div>';
-						echo '<div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div></div>';
-						echo '<div class="description_text">';
-						echo '<p>'.$q->description.'</p></div>';
-						echo '</div></div>';
-					?>
-				</div>
-			</div>
-		</div>
-
-		<!-- Products -->
-
-		<div class="products">
-			<div class="container">
-				<div class="row">
-					<div class="col text-center">
-						<div class="products_title">Related Products</div>
+				<!-- Get in touch -->
+				<div class="col-lg-8 contact_col">
+					<div class="get_in_touch">
+						<div class="section_title">Personal Information</div>
+						<div class="section_subtitle">Say hello</div>
+						<div class="contact_form_container">
+							<form action="#" id="contact_form" class="contact_form">
+								<div class="row">
+									<div class="col-xl-6">
+										<!-- Name -->
+										<label for="contact_name">First Name*</label>
+										<input type="text" id="contact_name" class="contact_input" required="required">
+									</div>
+									<div class="col-xl-6 last_name_col">
+										<!-- Last Name -->
+										<label for="contact_last_name">Last Name*</label>
+										<input type="text" id="contact_last_name" class="contact_input" required="required">
+									</div>
+								</div>
+								<div>
+									<!-- Subject -->
+									<label for="contact_company">Subject</label>
+									<input type="text" id="contact_company" class="contact_input">
+								</div>
+								<div>
+									<label for="contact_textarea">Message*</label>
+									<textarea id="contact_textarea" class="contact_input contact_textarea" required="required"></textarea>
+								</div>
+								<button class="button contact_button"><span>Send Message</span></button>
+							</form>
+						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col">
-			
-						<div class="product_grid">
-							<?php
-								$sql1='SELECT * FROM artworks WHERE artist='."'".$q->artist."'";
-								$result1=$mysqli->query($sql1);
-								foreach($result1 as $o){
-										echo '<div class="product">';
-										echo '<div class="product_image"><img src="../resources/img/'.$o["artworkID"].'.jpg" alt=""></div>';
-										echo '<div class="product_extra product_new"><a href="#">New</a></div>';
-										echo '<div class="product_content">';
-										echo '<div class="product_title"><a href="detail.php" id="'.$o["artworkID"].'">'.$o["title"].'</a></div>';
-										echo '<div class="product_price">$'.$o["price"].'</div>';
-										echo '</div></div>';
-								}
-							?>
+
+				<!-- Contact Info -->
+				<div class="col-lg-3 offset-xl-1 contact_col">
+					<div class="contact_info">
+						<div class="contact_info_section">
+							<div class="contact_info_title">Marketing</div>
+							<ul>
+								<li>Phone: <span>+53 345 7953 3245</span></li>
+								<li>Email: <span>yourmail@gmail.com</span></li>
+							</ul>
+						</div>
+						<div class="contact_info_section">
+							<div class="contact_info_title">Shippiing & Returns</div>
+							<ul>
+								<li>Phone: <span>+53 345 7953 3245</span></li>
+								<li>Email: <span>yourmail@gmail.com</span></li>
+							</ul>
+						</div>
+						<div class="contact_info_section">
+							<div class="contact_info_title">Information</div>
+							<ul>
+								<li>Phone: <span>+53 345 7953 3245</span></li>
+								<li>Email: <span>yourmail@gmail.com</span></li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+	</div>
 	<!-- Footer -->
 	
-		<div class="footer_overlay"></div>
+    <div class="footer_overlay"></div>
 		<footer class="footer">
 			<div class="footer_background" style="background-image:url(images/footer.jpg)"></div>
 			<div class="container">

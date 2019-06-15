@@ -57,8 +57,24 @@
 				     									H122.2c-25.4,0-46-16.8-46.4-37.5l26.8-302.3h45.2v41c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h139.3v41
 				     									c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
 			  										</g>
-												</svg>
-												<div>Cart <span>(0)</span></div>
+												</svg>                                        
+												<div>
+													Cart 
+													<span>
+														<?php
+															if(empty($_COOKIE['user'])||$_COOKIE["user"]==''){
+																$result_cart=0;
+															}else{
+																$mysqli_cart=new mysqli('localhost','root','r00t','db_project2');
+																$get_u_cart='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+																$uid_cart=mysqli_fetch_object($mysqli_cart->query($get_u_cart))->userID;
+																$sql_cart='SELECT count(*) FROM carts WHERE userID='.$uid_cart;
+																$result_cart=mysqli_fetch_row($mysqli_cart->query($sql_cart))[0];
+															}
+															echo '('.$result_cart.')';
+															?> 
+													</span>
+												</div>
 		      								</a>
 		    							</div>
 										<div class="search">
