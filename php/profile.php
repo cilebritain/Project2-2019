@@ -1,4 +1,4 @@
-
+<?php $mysqli=new mysqli('localhost','root','r00t','db_project2');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="../css/contact.css">
-    <link rel="stylesheet" type="text/css" href="../css/contact_responsive.css">
+	<link rel="stylesheet" type="text/css" href="../css/contact_responsive.css">    
+	<link rel="stylesheet" type="text/css" href="../css/cart_p.css">
+    <link rel="stylesheet" type="text/css" href="../css/cart_responsive_p.css">
 </head>
 <body>
 	<div class="super_container">
@@ -139,27 +141,26 @@
 		<div class="container">
 			<div class="row">
 
-				<!-- Get in touch -->
+				<!-- Get in touch 
 				<div class="col-lg-8 contact_col">
 					<div class="get_in_touch">
 						<div class="section_title">Personal Information</div>
-						<div class="section_subtitle">Say hello</div>
 						<div class="contact_form_container">
 							<form action="#" id="contact_form" class="contact_form">
 								<div class="row">
-									<div class="col-xl-6">
-										<!-- Name -->
-										<label for="contact_name">First Name*</label>
-										<input type="text" id="contact_name" class="contact_input" required="required">
+									<div class="col-xl-12">
+										<!-- Name 
+										<label for="contact_name">User Name</label>
+										<div id="contact_name" class="contact_input">Dai</div>
 									</div>
-									<div class="col-xl-6 last_name_col">
-										<!-- Last Name -->
-										<label for="contact_last_name">Last Name*</label>
-										<input type="text" id="contact_last_name" class="contact_input" required="required">
+									<div class="col-xl-12 last_name_col">
+										<!-- Last Name 
+										<label for="contact_last_name">Nick Name</label>
+										<div id="contact_last_name" class="contact_input">yuchun</div>
 									</div>
 								</div>
 								<div>
-									<!-- Subject -->
+									<!-- Subject 
 									<label for="contact_company">Subject</label>
 									<input type="text" id="contact_company" class="contact_input">
 								</div>
@@ -174,34 +175,206 @@
 				</div>
 
 				<!-- Contact Info -->
-				<div class="col-lg-3 offset-xl-1 contact_col">
-					<div class="contact_info">
-						<div class="contact_info_section">
-							<div class="contact_info_title">Marketing</div>
-							<ul>
-								<li>Phone: <span>+53 345 7953 3245</span></li>
-								<li>Email: <span>yourmail@gmail.com</span></li>
-							</ul>
+				<?php
+					$sql_info='SELECT * FROM users WHERE name="'.$_COOKIE['user'].'"';
+					$result_info=mysqli_fetch_object($mysqli->query($sql_info));
+
+					echo '<div class="col-lg-12 offset-xl-1 contact_col">
+							<div class="contact_info">
+								<div class="contact_info_section">
+									<div class="contact_info_title">User name</div>
+									<ul>
+										<li><span>'.$result_info->name.'</span></li>
+									</ul>
+								</div>
+							<div class="contact_info_section">
+								<div class="contact_info_title">Balance</div>
+								<ul>
+									<li><span>'.$result_info->balance.'</span></li>
+									<li><span><button>charge</button></span></li>
+								</ul>
+							</div>
+							<div class="contact_info_section">
+								<div class="contact_info_title">Email</div>
+								<ul>
+									<li><span>'.$result_info->email.'</span></li>
+								</ul>
+							</div>
+							<div class="contact_info_section">
+								<div class="contact_info_title">Tel</div>
+								<ul>
+									<li><span>'.$result_info->tel.'</span></li>
+								</ul>
+							</div>
+							<div class="contact_info_section">
+								<div class="contact_info_title">Address</div>
+								<ul>
+									<li><span>'.$result_info->address.'</span></li>
+								</ul>
+							</div>
 						</div>
-						<div class="contact_info_section">
-							<div class="contact_info_title">Shippiing & Returns</div>
-							<ul>
-								<li>Phone: <span>+53 345 7953 3245</span></li>
-								<li>Email: <span>yourmail@gmail.com</span></li>
-							</ul>
-						</div>
-						<div class="contact_info_section">
-							<div class="contact_info_title">Information</div>
-							<ul>
-								<li>Phone: <span>+53 345 7953 3245</span></li>
-								<li>Email: <span>yourmail@gmail.com</span></li>
-							</ul>
-						</div>
+					</div>';
+				?>
+			</div>
+			<div class="row">
+				<div class="col">
+					<!-- Column Titles -->
+					<div class="cart_info_columns clearfix">
+						<div class="cart_info_col cart_info_col_product">Product_post</div>
+						<div class="cart_info_col cart_info_col_price">Price</div>
+						<div class="cart_info_col cart_info_col_quantity">Quantity</div>
+						<div class="cart_info_col cart_info_col_total">Total</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="row cart_items_row">
+				<div class="col">
+					<?php
+						$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+						$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
+						$sql='SELECT artworkID FROM carts WHERE userID='.$uid;
+						$result=mysqli_fetch_all($mysqli->query($sql));
+						$sum=0;
+						foreach($result as $o){
+							$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
+							$sum+=$p->price;
+							echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
+								echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
+									echo '<div class="cart_item_image">';
+										echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+									echo '</div>';
+									echo '<div class="cart_item_name_container">';
+										echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
+										echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
+									echo '</div>';
+								echo '</div>';
+								echo '<div class="cart_item_price">$'.$p->price.'</div>';
+								echo '<div class="cart_item_quantity">';
+									echo '<div class="product_quantity_container">';
+										echo '<div class="product_quantity clearfix">';
+											echo '<span>Qty</span>';
+											echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
+											echo '<div class="quantity_buttons">';
+												echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
+												echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+								echo '<div class="cart_item_total">'.$p->price.'</div>';
+							echo '</div>';
+						}
+					?>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<!-- Column Titles -->
+					<div class="cart_info_columns clearfix">
+						<div class="cart_info_col cart_info_col_product">Product_selled</div>
+						<div class="cart_info_col cart_info_col_price">Price</div>
+						<div class="cart_info_col cart_info_col_quantity">Quantity</div>
+						<div class="cart_info_col cart_info_col_total">Total</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row cart_items_row">
+			<div class="col">
+				<?php
+					$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+					$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
+					$sql='SELECT artworkID FROM carts WHERE userID='.$uid;
+					$result=mysqli_fetch_all($mysqli->query($sql));
+					$sum=0;
+					foreach($result as $o){
+						$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
+						$sum+=$p->price;
+						echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
+							echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
+								echo '<div class="cart_item_image">';
+									echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+								echo '</div>';
+								echo '<div class="cart_item_name_container">';
+									echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
+									echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
+								echo '</div>';
+							echo '</div>';
+							echo '<div class="cart_item_price">$'.$p->price.'</div>';
+							echo '<div class="cart_item_quantity">';
+								echo '<div class="product_quantity_container">';
+									echo '<div class="product_quantity clearfix">';
+										echo '<span>Qty</span>';
+										echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
+										echo '<div class="quantity_buttons">';
+											echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
+											echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+							echo '<div class="cart_item_total">'.$p->price.'</div>';
+						echo '</div>';
+					}
+				?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<!-- Column Titles -->
+				<div class="cart_info_columns clearfix">
+					<div class="cart_info_col cart_info_col_product">Cart</div>
+					<div class="cart_info_col cart_info_col_price">Price</div>
+					<div class="cart_info_col cart_info_col_quantity">Quantity</div>
+					<div class="cart_info_col cart_info_col_total">Total</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cart_items_row">
+			<div class="col">
+				<?php
+					$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+					$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
+					$sql='SELECT artworkID FROM carts WHERE userID='.$uid;
+					$result=mysqli_fetch_all($mysqli->query($sql));
+					$sum=0;
+					foreach($result as $o){
+						$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
+						$sum+=$p->price;
+						echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
+							echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
+								echo '<div class="cart_item_image">';
+									echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+								echo '</div>';
+								echo '<div class="cart_item_name_container">';
+									echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
+									echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
+								echo '</div>';
+							echo '</div>';
+							echo '<div class="cart_item_price">$'.$p->price.'</div>';
+							echo '<div class="cart_item_quantity">';
+								echo '<div class="product_quantity_container">';
+									echo '<div class="product_quantity clearfix">';
+										echo '<span>Qty</span>';
+										echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
+										echo '<div class="quantity_buttons">';
+											echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
+											echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+							echo '<div class="cart_item_total">'.$p->price.'</div>';
+						echo '</div>';
+					}
+				?>
+			</div>
 		</div>
 	</div>
+</div>
 	<!-- Footer -->
 	
     <div class="footer_overlay"></div>
