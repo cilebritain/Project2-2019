@@ -10,6 +10,14 @@ function add_cart(){
     } else {
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
+    xmlhttp.onreadystatechange=function(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+            if(xmlhttp.responseText=='existed'){
+                alert('you can not add one good to the cart twice');
+                document.location.href="../php/detail.php";
+            }
+        }
+    }
     xmlhttp.open("GET","../php/addtocart.php?artworkID="+artworkID,true);
     xmlhttp.send();
     return true;
