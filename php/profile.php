@@ -255,7 +255,7 @@
 							echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
 								echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
 									echo '<div class="cart_item_image">';
-										echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+										echo '<div style="width:150px;height:150px;overflow:hidden;"><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
 									echo '</div>';
 									echo '<div class="cart_item_name_container">';
 										echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
@@ -308,7 +308,7 @@
 						echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
 							echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
 								echo '<div class="cart_item_image">';
-									echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+									echo '<div style="width:150px;height:150px;overflow:hidden;"><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
 								echo '</div>';
 								echo '<div class="cart_item_name_container">';
 									echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
@@ -360,7 +360,7 @@
 						echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
 							echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
 								echo '<div class="cart_item_image">';
-									echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+									echo '<div style="width:150px;height:150px;overflow:hidden;"><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
 								echo '</div>';
 								echo '<div class="cart_item_name_container">';
 									echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';

@@ -70,7 +70,7 @@ function checkout(){
         }
         xmlhttp.onreadystatechange=function(){
             if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                alert(xmlhttp.responseText);
+                if(xmlhttp.responseText=='low')alert('Your balance is not enough');
                 document.location.href="../php/profile.php";
             }
         }

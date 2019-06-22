@@ -17,16 +17,15 @@
         $mysqli->query($sql_nor);
     
         $sql_aw='SELECT * FROM carts WHERE userID='.$uid;
-        $result_aw=mysqli_fetch_all($mysqli->query($sql_aw));
+        $result_aw=$mysqli->query($sql_aw);
         foreach($result_aw as $o){
-            $aw_id=mysqli_fetch_object($o)->artworkID;
-            $sql_upo='UPDATE artworks SET ownerID='.$uid.' orderID='.($row+1).' WHERE artworkID='.$aw_id;
+            $aw_id=$o["artworkID"];
+            $sql_upo='UPDATE artworks SET ownerID='.$uid.',orderID='.($row+1).' WHERE artworkID='.$aw_id;
             $mysqli->query($sql_upo);
         }
-
         $sql_cl='DELETE FROM carts WHERE userID='.$uid;
         $mysqli->query($sql_cl);    
     }else{
-        echo 'Your balance is not enough';
+        echo 'low';
     }
 ?>
