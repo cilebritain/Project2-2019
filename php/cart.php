@@ -30,7 +30,7 @@
                                             echo '<li><a href="register.php" id="register_a">Register</a></li>';
                                         }
                                         else{
-                                            echo '<li><a href="cart.php" style="color:red;">'.$_COOKIE['user'].'</a></li>';
+                                            echo '<li><a href="profile.php" style="color:red;">'.$_COOKIE['user'].'</a></li>';
                                             echo '<li><a href="#" onclick="logout()">Logout</a></li>';
                                         }
                                     ?>

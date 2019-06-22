@@ -1,4 +1,9 @@
-<?php $mysqli=new mysqli('localhost','root','r00t','db_project2');?>
+<?php 
+	if(empty($_COOKIE['user'])||$_COOKIE['user']==''){
+		echo '<script>alert("you can not access to this page before you login");document.location.href="homepage.php"</script>';
+	}
+	$mysqli=new mysqli('localhost','root','r00t','db_project2');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,8 +195,15 @@
 							<div class="contact_info_section">
 								<div class="contact_info_title">Balance</div>
 								<ul>
-									<li><span>'.$result_info->balance.'</span></li>
-									<li><span><button>charge</button></span></li>
+									<li><span>'.$result_info->balance.'<button class="btn-default" style="margin-left:100px;" id="chargebutton">charge</button></span></li>
+									<li>
+										<div id="charge" style="display:none;">
+											<form action="charge.php" method="GET" onsubmit="return charge_submit()">
+												<input type="number" style="form-control" name="amount" placeholder="please input the amount" id="charge_amount">
+												<button type="submit" style="form-control">submit</button>
+											</form>
+										</div>
+									<li>
 								</ul>
 							</div>
 							<div class="contact_info_section">
@@ -216,6 +228,7 @@
 					</div>';
 				?>
 			</div>
+			
 			<div class="row">
 				<div class="col">
 					<!-- Column Titles -->
@@ -409,6 +422,7 @@
 	<script src="../javascript/login.js"></script>
 	<script src="../javascript/register.js"></script>
 	<script src="../javascript/cart.js"></script>
+	<script src="../javascript/charge.js"><script>
 	<script src="../css/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../plugins/greensock/TweenMax.min.js"></script>
 	<script src="../plugins/greensock/TimelineMax.min.js"></script>
