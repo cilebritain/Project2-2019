@@ -167,7 +167,7 @@
 									echo '</div>';
 									echo '<div class="cart_item_name_container">';
 										echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
-										echo '<div class="cart_item_edit"><a href="#" id="delete_cart">Delete Product</a></div>';
+										echo '<div class="cart_item_edit"><a href="#" class="delete_cart">Delete Product</a></div>';
 									echo '</div>';
 								echo '</div>';
 								echo '<div class="cart_item_price">$'.$p->price.'</div>';
@@ -245,11 +245,11 @@
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Total</div>
-									<div class="cart_total_value ml-auto">$<?php echo $sum; ?></div>
+									<div class="cart_total_value ml-auto" id="goods_sum">$<?php echo $sum; ?></div>
 								</li>
 							</ul>
 						</div>
-						<div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+						<div class="button checkout_button" onclick="checkout()"><a href="#">Proceed to checkout</a></div>
 					</div>
 				</div>
 			</div>

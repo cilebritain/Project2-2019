@@ -40,7 +40,7 @@ function clear_cart(){
     }
 }
 
-$('#delete_cart').click(function(){
+$('.delete_cart').click(function(){
     var p=$(this).parent().prev().children().attr('id');
     var message=confirm('Are you sure delete this good?');
     if(message==true){
@@ -57,3 +57,24 @@ $('#delete_cart').click(function(){
         
     }
 });
+
+function checkout(){
+    var message=confirm('Are you sure pay these goods?');
+    if(message=true){
+        var p=document.getElementById('goods_sum').innerHTML.substring(1);
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        } else {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function(){
+            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                alert(xmlhttp.responseText);
+                document.location.href="../php/profile.php";
+            }
+        }
+        xmlhttp.open("GET","../php/checkout.php?sum="+p,true);
+        xmlhttp.send();
+    }
+}
