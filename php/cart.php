@@ -23,7 +23,7 @@
                             <nav class="main_nav">
                                 <ul>
                                     <li class="active"><a href="homepage.php">Home</a></li>
-                                    <li><a href="detail.php">Product</a></li>
+                                    <li><a href="detail.php" id="product_link">Product</a></li>
                                     <?php
                                         if(empty($_COOKIE['user'])||$_COOKIE['user']==''){
                                             echo '<li><a href="login.php" id="login_a">Login</a></li>';
@@ -163,11 +163,11 @@
 							echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
 								echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
 									echo '<div class="cart_item_image">';
-										echo '<div><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+										echo '<div style="width:150px;height:150px;overflow:hidden;"><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
 									echo '</div>';
 									echo '<div class="cart_item_name_container">';
 										echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
-										echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
+										echo '<div class="cart_item_edit"><a href="#" id="delete_cart">Delete Product</a></div>';
 									echo '</div>';
 								echo '</div>';
 								echo '<div class="cart_item_price">$'.$p->price.'</div>';
@@ -225,18 +225,6 @@
 								<span class="checkmark"></span>
 								<span class="delivery_price">Free</span>
 							</label>
-						</div>
-					</div>
-
-					<!-- Coupon Code -->
-					<div class="coupon">
-						<div class="section_title">Coupon code</div>
-						<div class="section_subtitle">Enter your coupon code</div>
-						<div class="coupon_form_container">
-							<form action="#" id="coupon_form" class="coupon_form">
-								<input type="text" class="coupon_input" required="required">
-								<button class="button coupon_button"><span>Apply</span></button>
-							</form>
 						</div>
 					</div>
 				</div>

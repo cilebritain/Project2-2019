@@ -13,3 +13,7 @@ $('.home_button a').click(function(){
 $('.cart_item_name a').click(function(){
     Cookies.set('nowproduct',$(this).attr('id'));
 });
+
+$('#product_link').click(function(){
+    Cookies.set('nowproduct',6);
+});

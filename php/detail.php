@@ -142,12 +142,7 @@
 						$p=$_COOKIE["nowproduct"];
 						$sql='SELECT * FROM artworks WHERE artworkID='.$p;
 						$result=$mysqli->query($sql);
-						if(!$result){
-							$_COOKIE['nowproduct']=6;
-							$q=$mysqli->query('SELECT * FROM artworks WHERE artworkID=6')->fetch_object();
-						}
-						else $q=$result->fetch_object();
-
+						$q=$result->fetch_object();
 						echo '<div class="col-lg-6">';
 						echo '<div class="details_image">';
 						echo '<div class="details_image_large"><img src="../resources/img/'.$q->imageFileName.'" alt=""><div class="product_extra product_new"><a href="#">New</a></div></div></div></div>';
@@ -168,7 +163,7 @@
 						echo '<div class="quantity_buttons">';
 						echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
 						echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
-						echo '</div></div><div class="button cart_button"><a href="cart.php" onclick="add_cart()">Add to cart</a></div></div>';
+						echo '</div></div><div class="button cart_button"><a href="cart.php" onclick="return add_cart()">Add to cart</a></div></div>';
 						echo '</div></div></div>';
 						echo '<div class="row description_row">';
 						echo '<div class="col">';

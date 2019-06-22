@@ -33,7 +33,7 @@
 		  							<nav class="main_nav">
 		    							<ul>
 											<li class="active"><a href="homepage.php">Home</a></li>
-											<li><a href="detail.php">Product</a></li>
+											<li><a href="detail.php" id="product_link">Product</a></li>
 											<?php
 												if(empty($_COOKIE['user'])||$_COOKIE['user']==''){
 													echo '<li><a href="login.php" id="login_a">Login</a></li>';

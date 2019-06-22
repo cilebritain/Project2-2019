@@ -31,3 +31,21 @@ function clear_cart(){
         
     }
 }
+
+$('#delete_cart').click(function(){
+    var p=$(this).parent().prev().children().attr('id');
+    var message=confirm('Are you sure delete this good?');
+    if(message==true){
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        } else {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","../php/delete_cart.php?artworkID="+p,true);
+        xmlhttp.send();
+        window.location.reload();            
+    }else{
+        
+    }
+});
