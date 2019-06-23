@@ -195,7 +195,7 @@
 							<div class="contact_info_section">
 								<div class="contact_info_title">Balance</div>
 								<ul>
-									<li><span>'.$result_info->balance.'<button class="btn-default" style="margin-left:100px;" id="chargebutton">charge</button></span></li>
+									<li><span>'.$result_info->balance.'<div class="button checkout_button col-md-2" id="chargebutton"><a href="javascript:void(0)">Charge</a></div></span></li>
 									<li>
 										<div id="charge" style="display:none;">
 											<form action="charge.php" method="GET" onsubmit="return charge_submit()">
@@ -281,6 +281,7 @@
 					?>
 				</div>
 			</div>
+			<div class="button checkout_button col-md-4" onclick="post_good()" style="margin-bottom:50px;"><a href="postgood.php">Post your goods</a></div>
 
 			<div class="row">
 				<div class="col">
