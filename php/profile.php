@@ -246,8 +246,68 @@
 					<?php
 						$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
 						$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
-						$sql='SELECT artworkID FROM carts WHERE userID='.$uid;
-						$result=mysqli_fetch_all($mysqli->query($sql));
+						$sql='SELECT artworkID FROM artworks WHERE postID='.$uid.' AND ownerID=0';
+						$result=$mysqli->query($sql);
+						if($result){
+							$result=mysqli_fetch_all($result);
+							$sum=0;
+							foreach($result as $o){
+								$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
+								$sum+=$p->price;
+								echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
+									echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
+										echo '<div class="cart_item_image">';
+											echo '<div style="width:150px;height:150px;overflow:hidden;"><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
+										echo '</div>';
+										echo '<div class="cart_item_name_container">';
+											echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
+											echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
+											echo '<div class="cart_item_edit"><a href="#">Delete Product</a></div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="cart_item_price">$'.$p->price.'</div>';
+									echo '<div class="cart_item_quantity">';
+										echo '<div class="product_quantity_container">';
+											echo '<div class="product_quantity clearfix">';
+												echo '<span>Qty</span>';
+												echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
+												echo '<div class="quantity_buttons">';
+													echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
+													echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
+												echo '</div>';
+											echo '</div>';
+										echo '</div>';
+									echo '</div>';
+									echo '<div class="cart_item_total">'.$p->price.'</div>';
+								echo '</div>';
+							}
+						}
+					?>
+				</div>
+			</div>
+			<div class="button checkout_button col-md-4" onclick="post_good()" style="margin-bottom:50px;"><a href="postgood.php">Post your goods</a></div>
+
+			<div class="row">
+				<div class="col">
+					<!-- Column Titles -->
+					<div class="cart_info_columns clearfix">
+						<div class="cart_info_col cart_info_col_product">Product_selled</div>
+						<div class="cart_info_col cart_info_col_price">Price</div>
+						<div class="cart_info_col cart_info_col_quantity">Quantity</div>
+						<div class="cart_info_col cart_info_col_total">Total</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row cart_items_row">
+			<div class="col">
+				<?php
+					$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
+					$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
+					$sql='SELECT artworkID FROM artworks WHERE postID='.$uid.' AND ownerID!=0';
+					$result=$mysqli->query($sql);
+					if($result){
+						$result=mysqli_fetch_all($result);
 						$sum=0;
 						foreach($result as $o){
 							$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
@@ -277,62 +337,9 @@
 								echo '</div>';
 								echo '<div class="cart_item_total">'.$p->price.'</div>';
 							echo '</div>';
-						}
-					?>
-				</div>
-			</div>
-			<div class="button checkout_button col-md-4" onclick="post_good()" style="margin-bottom:50px;"><a href="postgood.php">Post your goods</a></div>
-
-			<div class="row">
-				<div class="col">
-					<!-- Column Titles -->
-					<div class="cart_info_columns clearfix">
-						<div class="cart_info_col cart_info_col_product">Product_selled</div>
-						<div class="cart_info_col cart_info_col_price">Price</div>
-						<div class="cart_info_col cart_info_col_quantity">Quantity</div>
-						<div class="cart_info_col cart_info_col_total">Total</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="row cart_items_row">
-			<div class="col">
-				<?php
-					$get_u='SELECT userID FROM users WHERE name="'.$_COOKIE["user"].'"';
-					$uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
-					$sql='SELECT artworkID FROM carts WHERE userID='.$uid;
-					$result=mysqli_fetch_all($mysqli->query($sql));
-					$sum=0;
-					foreach($result as $o){
-						$p=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o[0]));
-						$sum+=$p->price;
-						echo '<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start" style="margin-top=50px;">';
-							echo '<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">';
-								echo '<div class="cart_item_image">';
-									echo '<div style="width:150px;height:150px;overflow:hidden;"><img src="../resources/img/'.$p->imageFileName.'" alt=""></div>';
-								echo '</div>';
-								echo '<div class="cart_item_name_container">';
-									echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
-									echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
-								echo '</div>';
-							echo '</div>';
-							echo '<div class="cart_item_price">$'.$p->price.'</div>';
-							echo '<div class="cart_item_quantity">';
-								echo '<div class="product_quantity_container">';
-									echo '<div class="product_quantity clearfix">';
-										echo '<span>Qty</span>';
-										echo '<input id="quantity_input" type="text" pattern="[0-9]*" value="1">';
-										echo '<div class="quantity_buttons">';
-											echo '<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>';
-											echo '<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>';
-										echo '</div>';
-									echo '</div>';
-								echo '</div>';
-							echo '</div>';
-							echo '<div class="cart_item_total">'.$p->price.'</div>';
-						echo '</div>';
 					}
-				?>
+				}
+			?>
 			</div>
 		</div>
 
