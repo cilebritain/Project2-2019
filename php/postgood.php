@@ -17,10 +17,10 @@
         <div class="row align-items-center" style="margin-top:50px;">
             <div class="col"></div>
             <div class="col">
-                <form method="post" onsubmit="return handlepost()" action="handlepost.php">
+                <form method="POST" onsubmit="return handlepost()" action="handlepost.php" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="aw_name">Artwork name</label>
-                        <input type="text" class="form-control" id="aw_name" placeholder="artwork name" name="artworkname">
+                        <input type="text" class="form-control" id="aw_name" placeholder="artwork name" name="name">
                     </div>
                     <div class="form-group">
                         <label for="aw_author">Author</label>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label for="aw_file">Photo</label>
-                        <input type="file" class="form-control" id="aw_file" name="aw_file">
+                        <input type="file" class="form-control" id="aw_file" name="file">
                     </div>
                     <button type="submit" class="btn btn-primary">Post</button>    
                 </form>
