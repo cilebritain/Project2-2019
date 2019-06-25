@@ -1,9 +1,11 @@
 <?php
     $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
-    $sql='SELECT * FROM artworks WHERE artworkID BETWEEN 58 and 60';
-    $sql1='SELECT * FROM artworks WHERE artworkID BETWEEN 92 and 103';
-    $result=$mysqli->query($sql);
-	$result1=$mysqli->query($sql1);
+    if($_POST["keyword"])$key=$_POST["keyword"];
+    else $key="a";
+    $sql_key='SELECT * FROM artworks WHERE title LIKE "%'.$key.'%" OR artist LIKE "%'.$key.'%" OR description LIKE "%'.$key.'%" LIMIT 0,8';
+    $result_key=$mysqli->query($sql_key);
+    if($_POST["page"])$page=$_POST["page"];
+    else $page=1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,8 @@
     	<link rel="stylesheet" type="text/css" href="../css/homepage.css">
         <link rel="stylesheet" type="text/css" href="../css/responsive.css">
     	<link rel="stylesheet" type="text/css" href="../css/categories.css">
-        <link rel="stylesheet" type="text/css" href="../css/categories_responsive.css">        
+        <link rel="stylesheet" type="text/css" href="../css/categories_responsive.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
   	</head>
 	<body>
     	<div class="super_container">
@@ -118,11 +121,29 @@
                 </div>
             </div>
         </header>
-        <!-- Products -->
-        <div class="row">
+
+        <!-- Products--> 
+        <div class="row" style="margin:auto;margin-top:50px;width:80%;">
+            <div class="col">
+                <div class="navbar navbar-light bg-light" style="margin-top:100px;">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <span style="margin-left:30px;margin-right:30px;">search by:</span>
+                        <select class="selectpicker" style="margin-left:50px;">
+                            <option value="1">artwork name</option>
+                            <option value="2">description</option>
+                            <option value="3">author</option>  
+                            <option value="4">all above</option>                          
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin:0 auto;width:70%;>
             <div class="col">
                 <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-                    <div class="results">Showing <span>12</span> results</div>
+                    <div class="results">Showing <span>8</span> results each page</div>
                     <div class="sorting_container ml-md-auto">
                         <div class="sorting">
                             <ul class="item_sorting">
@@ -142,29 +163,45 @@
             </div>
         </div>
 
+
         <div class="products">
 	        <div class="container">
-	            <div class="row">
+
+                <div class="row">
 	                <div class="col">
 	                    <div class="product_grid">
-
                             <?php
-                                foreach($result1 as $p)
-                                {
-                                    echo '<div class="product">';
-                                    echo '<div class="product_image"><img src="../resources/img/'.$p["imageFileName"].'" alt=""></div>';
-                                    echo '<div class="product_extra product_new"><a href="#">New</a></div>';
-                                    echo '<div class="product_content">';
-    		                        echo '<div class="product_title"><a href="detail.php" id="'.$p["artworkID"].'">'.$p["title"].'</a></div>';
-                                    echo '<div class="product_price">$'.$p["price"].'</div>';
-                                    echo '</div></div>';
+                                if($result_key){
+                                    foreach($result_key as $p)
+                                    {
+                                        echo '<div class="product">';
+                                        echo '<div class="product_image"><img src="../resources/img/'.$p["imageFileName"].'" alt=""></div>';
+                                        echo '<div class="product_extra product_new"><a href="#">New</a></div>';
+                                        echo '<div class="product_content">';
+                                        echo '<div class="product_title"><a href="detail.php" id="'.$p["artworkID"].'">'.$p["title"].'</a></div>';
+                                        echo '<div class="product_price">$'.$p["price"].'</div>';
+                                        echo '</div></div>';
+                                    }
                                 }
                             ?>
-                            
                         </div>
 	                </div>
 	            </div>
-	        </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php
+                            echo '<ul class="pagination" style="margin-left:300px;">';
+                            echo '<li class="page-item"><a class="page-link" onclick="changePage(1)">Previous</a></li>'; 
+                            for($n = 1; $n <= 10; $n++){
+                                echo '<li class="page-item"><a class="page-link" onclick="changePage(this.innerText)">'.$n.'</a></li>';
+                            };
+                            echo '<li class="page-item"><a class="page-link" onclick="changePage(2)">Next</a></li></ul>';
+                            echo '</div>';
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
 
     <div class="footer_overlay"></div>
@@ -211,5 +248,6 @@
     <script src="../plugins/easing/easing.js"></script>
     <script src="../plugins/parallax-js-master/parallax.min.js"></script>
     <script src="../javascript/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
 </body>
 </html>

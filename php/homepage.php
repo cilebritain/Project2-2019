@@ -109,8 +109,8 @@
 	    				<div class="row">
 	      					<div class="col">
 								<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-		  							<form action="#">
-		    							<input type="text" class="search_input" placeholder="Search" required="required">
+		  							<form method="POST" action="search.php" onsubmit="return search()">
+		    							<input type="text" class="search_input" placeholder="Search" required="required" name="keyword" id="search_input">
 		  							</form>
 								</div>
 	      					</div>
@@ -255,6 +255,7 @@
     <script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
 	<script src="../javascript/login.js"></script>
+	<script src="../javascript/search.js"></script>
 	<script src="../javascript/register.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
