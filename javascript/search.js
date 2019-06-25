@@ -8,7 +8,10 @@ function changePage(index) {
     }
     xmlhttp.onreadystatechange=function(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            document.getElementById("container").innerHTML=xmlhttp.responseText;
+            var p=document.getElementById("container");
+            p.innerHTML=xmlhttp.responseText;
+            $.parser.parse();
+            $("#container").trigger("create");
             $("#pp").trigger("create");
         }
     }

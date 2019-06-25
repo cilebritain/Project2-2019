@@ -96,14 +96,14 @@
 					</div>
 				</div>
 			</div>
-			<!-- Search Panel -->
+		<!-- Search Panel -->
 			<div class="search_panel trans_300">
 				<div class="container">
 					<div class="row">
 						<div class="col">
 							<div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-								<form action="#">
-									<input type="text" class="search_input" placeholder="Search" required="required">
+								<form method="POST" action="search.php">
+									<input type="text" class="search_input" placeholder="Search" required="required" name="keyword" id="search_input">
 								</form>
 							</div>
 						</div>

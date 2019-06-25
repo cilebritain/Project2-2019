@@ -159,7 +159,7 @@
                                     }else if($way==2){
                                         $sql='SELECT * FROM artworks WHERE ownerID=0 AND description LIKE "%'.$key.'%"';
                                     }else if($way==3){
-                                        $sql='SELECT * FROM artworks WHERE ownerID=0 AND author LIKE "%'.$key.'%"';            
+                                        $sql='SELECT * FROM artworks WHERE ownerID=0 AND artist LIKE "%'.$key.'%"';            
                                     }else if($way==4){
                                         $sql='SELECT * FROM artworks WHERE ownerID=0 AND title LIKE "%'.$key.'%" OR description LIKE "%'.$key.'%" OR artist LIKE "%'.$key.'%"';
                                     }
@@ -180,7 +180,7 @@
                                 $rows=$result->num_rows;
                                 $pages=($rows-1)/8+1;
 
-                                if($rows==0)echo 'no result';
+                                if($rows==0)echo '<script>alert("no result");</script>';
 
                                 if($result){
                                     for($n=1;$n<=8;$n++)
