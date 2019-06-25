@@ -1,12 +1,4 @@
-<?php
-    $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
-    if($_POST["keyword"])$key=$_POST["keyword"];
-    else $key="a";
-    $sql_key='SELECT * FROM artworks WHERE title LIKE "%'.$key.'%" OR artist LIKE "%'.$key.'%" OR description LIKE "%'.$key.'%" LIMIT 0,8';
-    $result_key=$mysqli->query($sql_key);
-    if($_POST["page"])$page=$_POST["page"];
-    else $page=1;
-?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
   	<head>
@@ -126,61 +118,83 @@
         <div class="row" style="margin:auto;margin-top:50px;width:80%;">
             <div class="col">
                 <div class="navbar navbar-light bg-light" style="margin-top:100px;">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline" method="POST" onsubmit="search.php">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         <span style="margin-left:30px;margin-right:30px;">search by:</span>
-                        <select class="selectpicker" style="margin-left:50px;">
+                        <select class="selectpicker" style="margin-left:50px;" name="search_op">
                             <option value="1">artwork name</option>
                             <option value="2">description</option>
                             <option value="3">author</option>  
-                            <option value="4">all above</option>                          
+                            <option value="4" selected="selected">all above</option>                          
+                        </select>
+                        <span style="margin-left:30px;margin-right:30px;">sort by:</span>
+                        <select class="selectpicker" style="margin-left:50px;" name="sort_op">
+                            <option value="1" selected="selected">price up</option>
+                            <option value="2">price down</option>
+                            <option value="3">view</option>                            
                         </select>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin:0 auto;width:70%;>
-            <div class="col">
-                <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-                    <div class="results">Showing <span>8</span> results each page</div>
-                    <div class="sorting_container ml-md-auto">
-                        <div class="sorting">
-                            <ul class="item_sorting">
-                                <li>
-                                    <span class="sorting_text">Sort by</span>
-                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                    <ul>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Name</span></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-
-        <div class="products">
-	        <div class="container">
+        <div class="products" id="pp">
+	        <div class="container" id="container">
 
                 <div class="row">
 	                <div class="col">
 	                    <div class="product_grid">
                             <?php
-                                if($result_key){
-                                    foreach($result_key as $p)
+                                
+                                $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
+                                if(isset($_POST["keyword"])&&$_POST["keyword"]!=""){
+                                    $key=$_POST["keyword"];
+                                    if(isset($_POST["search_op"])&&$_POST["search_op"]!="")$way=$_POST["search_op"];
+                                    else $way=4;
+                                    if(isset($_POST["sort_op"])&&$_POST["sort_op"]!="")$sort=$_POST["sort_op"];
+                                    else $sort=1;                                    
+                                    if($way==1){
+                                        $sql='SELECT * FROM artworks WHERE ownerID=0 AND title LIKE "%'.$key.'%"';
+                                    }else if($way==2){
+                                        $sql='SELECT * FROM artworks WHERE ownerID=0 AND description LIKE "%'.$key.'%"';
+                                    }else if($way==3){
+                                        $sql='SELECT * FROM artworks WHERE ownerID=0 AND author LIKE "%'.$key.'%"';            
+                                    }else if($way==4){
+                                        $sql='SELECT * FROM artworks WHERE ownerID=0 AND title LIKE "%'.$key.'%" OR description LIKE "%'.$key.'%" OR artist LIKE "%'.$key.'%"';
+                                    }
+                                    if($sort==1){
+                                        $sql.=' ORDER BY price';
+                                    }else if($sort==2){
+                                        $sql.=' ORDER BY price DESC';
+                                    }else if($sort==3){
+                                        $sql.=' ORDER BY view DESC';
+                                    }                                    
+                                }else{
+                                    $key="a";$way=4;$sort=1;
+                                }
+
+                                $_SESSION["search_sql"]=$sql;
+
+                                $result=$mysqli->query($sql);
+                                $rows=$result->num_rows;
+                                $pages=($rows-1)/8+1;
+
+                                if($rows==0)echo 'no result';
+
+                                if($result){
+                                    for($n=1;$n<=8;$n++)
                                     {
-                                        echo '<div class="product">';
-                                        echo '<div class="product_image"><img src="../resources/img/'.$p["imageFileName"].'" alt=""></div>';
-                                        echo '<div class="product_extra product_new"><a href="#">New</a></div>';
-                                        echo '<div class="product_content">';
-                                        echo '<div class="product_title"><a href="detail.php" id="'.$p["artworkID"].'">'.$p["title"].'</a></div>';
-                                        echo '<div class="product_price">$'.$p["price"].'</div>';
-                                        echo '</div></div>';
+                                        $p=$result->fetch_assoc();
+                                        if($p){
+                                            echo '<div class="product">';
+                                            echo '<div class="product_image"><img src="../resources/img/'.$p["imageFileName"].'" alt=""></div>';
+                                            echo '<div class="product_extra product_new"><a href="#">New</a></div>';
+                                            echo '<div class="product_content">';
+                                            echo '<div class="product_title"><a href="detail.php" id="'.$p["artworkID"].'">'.$p["title"].'</a></div>';
+                                            echo '<div class="product_price">$'.$p["price"].'</div>';
+                                            echo '</div></div>';
+                                        }
                                     }
                                 }
                             ?>
@@ -188,19 +202,22 @@
 	                </div>
 	            </div>
                 
+                
                 <div class="row">
                     <div class="col-md-12">
                         <?php
-                            echo '<ul class="pagination" style="margin-left:300px;">';
+                            echo '<ul class="pagination">';
                             echo '<li class="page-item"><a class="page-link" onclick="changePage(1)">Previous</a></li>'; 
-                            for($n = 1; $n <= 10; $n++){
-                                echo '<li class="page-item"><a class="page-link" onclick="changePage(this.innerText)">'.$n.'</a></li>';
+                            for($n = 1; $n <= $pages; $n++){
+                                if($n==1)echo '<li class="page-item active"><a class="page-link" onclick="changePage(this.innerText)">'.$n.'</a></li>';
+                                else echo '<li class="page-item"><a class="page-link" onclick="changePage(this.innerText)">'.$n.'</a></li>';
                             };
                             echo '<li class="page-item"><a class="page-link" onclick="changePage(2)">Next</a></li></ul>';
                             echo '</div>';
                         ?>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -236,7 +253,8 @@
     <script src="../javascript/js.cookie.js"></script>
 	<script src="../javascript/goods.js"></script>
 	<script src="../javascript/login.js"></script>
-	<script src="../javascript/register.js"></script>
+    <script src="../javascript/register.js"></script>
+    <script src="../javascript/search.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
     <script src="../plugins/greensock/TimelineMax.min.js"></script>
