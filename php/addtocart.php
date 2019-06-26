@@ -6,8 +6,13 @@
     $result2=$mysqli->query($sql2);
     $uid=mysqli_fetch_object($result2)->userID;
     $test='SELECT * FROM carts WHERE userID='.$uid.' AND artworkID='.$_GET['artworkID'];
-    $retest=mysqli_fetch_object($mysqli->query($test))->cartID;
-    if($retest!=null){
+    $retest=mysqli_fetch_object($mysqli->query($test));
+    if($retest)$retest=$retest->cartID;
+    $sql_buy='SELECT * FROM artworks WHERE artworkID='.$_GET["artworkID"];
+    $buy=mysqli_fetch_object($mysqli->query($sql_buy))->ownerID;
+    if($buy!=0){
+        echo 'buyed';
+    }else if($retest!=null){
         echo 'existed';       
     }else{
         $sql ='INSERT INTO carts(cartID,artworkID,userID) VALUES("'.($row+1).'","'.$_GET["artworkID"].'","'.$uid.'");';

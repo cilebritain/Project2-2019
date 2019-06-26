@@ -16,6 +16,10 @@ function add_cart(){
                 alert('you can not add one good to the cart twice');
                 document.location.href="../php/detail.php";
             }
+            if(xmlhttp.responseText=='buyed'){
+                alert('this good have already been bought');
+                document.location.href="../php/detail.php";
+            }
         }
     }
     xmlhttp.open("GET","../php/addtocart.php?artworkID="+artworkID,true);
