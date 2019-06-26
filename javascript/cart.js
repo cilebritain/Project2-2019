@@ -58,6 +58,24 @@ $('.delete_cart').click(function(){
     }
 });
 
+$('.delete_product').click(function(){
+    var p=$(this).parent().prev().prev().children().attr('id');
+    var message=confirm('Are you sure delete this product?');
+    if(message==true){
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            xmlhttp=new XMLHttpRequest();
+        } else {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.open("GET","../php/delete_post.php?artworkID="+p,true);
+        xmlhttp.send();
+        window.location.reload();            
+    }else{
+        
+    }
+});
+
 function checkout(){
     var message=confirm('Are you sure pay these goods?');
     if(message=true){

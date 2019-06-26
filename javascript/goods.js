@@ -17,3 +17,7 @@ $('.cart_item_name a').click(function(){
 $('#product_link').click(function(){
     Cookies.set('nowproduct',6);
 });
+
+$('.modify_product').click(function(){
+    Cookies.set('nowproduct',$(this).attr('id'));
+});

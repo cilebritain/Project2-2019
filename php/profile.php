@@ -261,8 +261,8 @@
 										echo '</div>';
 										echo '<div class="cart_item_name_container">';
 											echo '<div class="cart_item_name"><a href="detail.php" id="'.$p->artworkID.'">'.$p->title.'</a></div>';
-											echo '<div class="cart_item_edit"><a href="#">Edit Product</a></div>';
-											echo '<div class="cart_item_edit"><a href="#">Delete Product</a></div>';
+											echo '<div class="cart_item_edit"><a href="modify.php" class="modify_product" id="'.$p->artworkID.'">Edit Product</a></div>';
+											echo '<div class="cart_item_edit"><a href="#" class="delete_product">Delete Product</a></div>';
 										echo '</div>';
 									echo '</div>';
 									echo '<div class="cart_item_price">$'.$p->price.'</div>';
