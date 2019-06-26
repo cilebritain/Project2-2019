@@ -12,19 +12,24 @@ function handlepost(){
         alert('please enter the infomation completely');
         return false;
     }
-    if(!Number.isInteger(year)){
-        alert('please enter the correct year!');
+    if(!isInteger(year)){
+        alert('please enter the correct format of year!');
         return false;
     }
     if(width<=0||height<=0){
         alert('please enter the correct width and height!');
         return false;
     }
-    if(!Number.isInteger(price)||price<=0){
+    if(!isInteger(price)||price<=0){
         alert('the price must be a positive integer');
         return false;
     }
     return true;
+}
+
+function isInteger(x){
+    if(x%1===0)return true;
+    return false;
 }
 
 function imgpreview(){

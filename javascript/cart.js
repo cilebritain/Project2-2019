@@ -96,7 +96,7 @@ function checkout(){
                     alert('Your balance is not enough');
                     document.location.href="../php/profile.php";
                 }else{
-                    alert('you have successfully bought these goods'+xmlhttp.responseText+" of them have been bought by others");
+                    alert('you have successfully bought these goods '+xmlhttp.responseText+" of them have been bought by others");
                     document.location.href="../php/profile.php";                    
                 }
             }

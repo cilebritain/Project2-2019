@@ -2,6 +2,10 @@ $('.product_title a').click(function(){
     Cookies.set('nowproduct',$(this).attr('id'));
 });
 
+$(document).on('click','.product_title a',function(){
+    Cookies.set('nowproduct',$(this).attr('id'));
+});
+
 $('.avds_link a').click(function(){
     Cookies.set('nowproduct',$(this).attr('id'));
 });

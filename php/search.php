@@ -248,9 +248,14 @@
 	        </div>
         </footer>
     </div>
-
+    
     <script src="../javascript/jquery-3.2.1.min.js"></script>
     <script src="../javascript/js.cookie.js"></script>
+    <script>
+        document.querySelector('.product_title a').onclick=function(){
+            Cookies.set('nowproduct',$(this).attr('id'));
+        }
+    </script>
 	<script src="../javascript/goods.js"></script>
 	<script src="../javascript/login.js"></script>
     <script src="../javascript/register.js"></script>

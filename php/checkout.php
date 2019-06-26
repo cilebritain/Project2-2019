@@ -10,11 +10,12 @@
     $sql_aw='SELECT * FROM carts WHERE userID='.$uid;
     $result_aw=$mysqli->query($sql_aw);
     foreach($result_aw as $o){
-            $aw_ow=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o["artworkID"]))->ownerID;
-            if($aw_id==0){
-                $sum+=$o["price"];
-            }else $hav++;
-        }
+        $aw_ow=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o["artworkID"]));
+        $ppr=$aw_ow->price;
+        $aw_ow=$aw_ow->ownerID;
+        if($aw_ow==0){
+            $sum+=$ppr;
+        }else $hav++;
     }
 
     if($ba>=$sum){
@@ -33,11 +34,21 @@
         $sql_aw='SELECT * FROM carts WHERE userID='.$uid;
         $result_aw=$mysqli->query($sql_aw);
         foreach($result_aw as $o){
-            $aw_ow=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o["artworkID"]))->ownerID;
-            if($aw_id==0){
+            $aw_ow=mysqli_fetch_object($mysqli->query('SELECT * FROM artworks WHERE artworkID='.$o["artworkID"]));
+            $aw_op=$aw_ow->postID;
+            $aw_pr=$aw_ow->price;
+            $aw_ow=$aw_ow->ownerID;
+            if($aw_ow==0){
                 $aw_id=$o["artworkID"];
                 $sql_upo='UPDATE artworks SET ownerID='.$uid.',orderID='.($row+1).' WHERE artworkID='.$aw_id;
                 $mysqli->query($sql_upo);
+                if($aw_op!=0){
+                    $sql_ba='SELECT balance FROM users WHERE userID="'.$aw_op.'"';
+                    $result_ba=$mysqli->query($sql_ba);
+                    $ba=mysqli_fetch_object($result_ba)->balance;
+                    $sql_p='UPDATE users SET balance='.($ba+$aw_pr).' WHERE userID='.$aw_op;
+                    $mysqli->query($sql_p);
+                }
             }
         }
         $sql_cl='DELETE FROM carts WHERE userID='.$uid;
