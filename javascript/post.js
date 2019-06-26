@@ -14,3 +14,9 @@ function handlepost(){
     }
     return true;
 }
+
+function imgpreview(){
+    let uploadElement = document.getElementById("aw_file");
+    let previewImage = document.getElementById("preview");
+    previewImage.src = window.URL.createObjectURL(uploadElement.files[0]);
+}

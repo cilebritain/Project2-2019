@@ -10,10 +10,11 @@
     	<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     	<link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
     	<link rel="stylesheet" type="text/css" href="../css/homepage.css">
-    	<link rel="stylesheet" type="text/css" href="../css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="../css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="../css/cropper.css">
   	</head>
 	<body>
-    <div class="super_container"  style="height:1000px;">
+    <div class="super_container"  style="height:1200px;">
         <div class="row align-items-center" style="margin-top:50px;">
             <div class="col"></div>
             <div class="col">
@@ -49,9 +50,12 @@
                     </div>
                     <div class="form-group">
                         <label for="aw_file">Photo</label>
-                        <input type="file" class="form-control" id="aw_file" name="file">
+                        <input type="file" class="form-control" id="aw_file" name="file" onchange="imgpreview()">
+                        <img id="preview" width="400px">
                     </div>
-                    <button type="submit" class="btn btn-primary">Post</button>    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </div>    
                 </form>
             </div>
             <div class="col"></div>
@@ -90,6 +94,7 @@
     <script src="../javascript/goods.js"></script>
     <script src="../javascript/register.js"></script>
     <script src="../javascript/post.js"></script>
+    <script scr="../javascript/cropper.js"></script>
     <script src="../css/bootstrap/js/popper.js"></script>
     <script src="../css/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/greensock/TweenMax.min.js"></script>
