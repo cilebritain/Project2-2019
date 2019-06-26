@@ -1,5 +1,11 @@
 <?php
-    $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
+	$mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
+	$p=$_COOKIE["nowproduct"];
+	$sql_up='SELECT * FROM artworks WHERE artworkID='.$p;	
+	$view=mysqli_fetch_object($mysqli->query($sql_up))->view;
+	$view+=1;
+	$sql_up='UPDATE artworks SET view='.$view.' WHERE artworkID='.$p;
+	$mysqli->query($sql_up);
 ?>
 
 <!DOCTYPE html>
@@ -169,7 +175,7 @@
 						echo '<div class="col">';
 						echo '<div class="description_title_container">';
 						echo '<div class="description_title">Description</div>';
-						echo '<div class="reviews_title"><a href="#">Reviews <span>(1)</span></a></div></div>';
+						echo '<div class="reviews_title"><a href="#">views <span>('.$view.')</span></a></div></div>';
 						echo '<div class="description_text">';
 						echo '<p>'.$q->description.'</p></div>';
 						echo '</div></div>';

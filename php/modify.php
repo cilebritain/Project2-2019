@@ -11,6 +11,7 @@
     $width=$result->width;
     $height=$result->height;
     $price=$result->price;
+    $file=$result->imageFileName;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
     	<link rel="stylesheet" type="text/css" href="../css/responsive.css">
   	</head>
 	<body>
-    <div class="super_container"  style="height:1000px;">
+    <div class="super_container"  style="height:1200px;">
         <div class="row align-items-center" style="margin-top:50px;">
             <div class="col"></div>
             <div class="col">
@@ -63,7 +64,8 @@
                     </div>
                     <div class="form-group">
                         <label for="aw_file">Photo</label>
-                        <input type="file" class="form-control" id="aw_file" name="file">
+                        <input type="file" class="form-control" id="aw_file" name="file" onchange="imgpreview()">
+                        <?php echo '<img id="preview" width="400px" src="../resources/img/'.$file.'">';?>
                     </div>
                     <?php echo '<input type="text" style="display:none" name="ID" value='.$artworkID.'>';?>
                     <button type="submit" class="btn btn-primary">submit change</button>    
