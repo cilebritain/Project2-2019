@@ -92,8 +92,13 @@ function checkout(){
         }
         xmlhttp.onreadystatechange=function(){
             if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                if(xmlhttp.responseText=='low')alert('Your balance is not enough');
-                document.location.href="../php/profile.php";
+                if(xmlhttp.responseText=='low'){
+                    alert('Your balance is not enough');
+                    document.location.href="../php/profile.php";
+                }else{
+                    alert('you have successfully bought these goods'+xmlhttp.responseText+" of them have been bought by others");
+                    document.location.href="../php/profile.php";                    
+                }
             }
         }
         xmlhttp.open("GET","../php/checkout.php?sum="+p,true);
