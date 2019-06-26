@@ -42,6 +42,13 @@
                         <label for="exampleInputAdd1">Address</label>
                         <input type="text" class="form-control" id="exampleInputAdd1" placeholder="Add" name="useradd1">
                     </div>
+                    <div class="form-group">
+                        <label for="certification_input">Certification code</label>
+                        <input type="text" class="form-control" id="vertification_input" placeholder="ver" name="ver">
+                        <div id="vertification_code" onclick="change_ver()" style="color:red;">
+                                <a href="#">点击刷新验证码</a>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Register</button>    
                 </form>
             </div>
