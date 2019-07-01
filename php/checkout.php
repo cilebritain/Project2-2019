@@ -27,7 +27,8 @@
         $uid=mysqli_fetch_object($mysqli->query($get_u))->userID;
     
         $sql_or='SELECT * FROM orders ORDER BY orderID DESC LIMIT 0,1';
-        $row=mysqli_fetch_object($mysqli->query($sql_or))->orderID;
+        $row=mysqli_fetch_object($mysqli->query($sql_or));
+        if($row)$row=$row->orderID;
         $sql_nor='INSERT INTO orders(orderID,ownerID,sum,timeCreated) VALUES("'.($row+1).'","'.$uid.'","'.$_GET['sum'].'","'.date('Y-m-d H:i:s').'")';
         $mysqli->query($sql_nor);
     

@@ -1,7 +1,7 @@
 <?php
     $mysqli = new mysqli('localhost', 'root', 'r00t', 'db_project2');
-    $sql='SELECT * FROM artworks WHERE artworkID BETWEEN 58 and 60';
-    $sql1='SELECT * FROM artworks WHERE artworkID BETWEEN 92 and 103';
+    $sql='SELECT * FROM artworks ORDER BY view DESC LIMIT 0,3';
+    $sql1='SELECT * FROM artworks ORDER BY timeReleased DESC LIMIT 0,8';
     $result=$mysqli->query($sql);
 	$result1=$mysqli->query($sql1);
 ?>
